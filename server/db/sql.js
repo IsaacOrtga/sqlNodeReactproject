@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+const mysql = require('mysql');
 const connection = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
@@ -14,17 +14,17 @@ connection.connect((err) => {
 });
 // connection.end();
 
-let createUser = `CREATE TABLE users (
-    user_id INT AUTO_INCREMENT,
-    name_u VARCHAR (100) NOT NULL,
-    surname VARCHAR (200) NOT NULL,
-    nick VARCHAR (30) NOT NULL,
-    email VARCHAR (100) NOT NULL,
-    password_u VARCHAR (100) NOT NULL,
-    description_u VARCHAR(500),
-    PRIMARY KEY(user_id)
-)`;
-connection.query(createUser, (err, rows) => {
-    if (err) throw err;
-    console.log('Datos de tabla1: /n', rows);
-});
+// let createUser = `CREATE TABLE users (
+//     user_id INT AUTO_INCREMENT,
+//     name_u VARCHAR (100) NOT NULL,
+//     surname VARCHAR (200) NOT NULL,
+//     nick VARCHAR (30) NOT NULL,
+//     email VARCHAR (100) NOT NULL,
+//     password_u VARCHAR (100) NOT NULL,
+//     description_u VARCHAR(500),
+//     PRIMARY KEY(user_id)
+// )`;
+// connection.query(createUser, (err, rows) => {
+//     if (err) throw err;
+//     console.log('Datos de tabla1: /n', rows);
+// });
