@@ -1,0 +1,16 @@
+.contenedor-leaflet{
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+}
+
+.leaflet-container {
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 3px 2px 3px 4px rgb(88, 85, 85);
+  float: right;
+  height: 400px;
+  margin: -18% 5% 0% 0%;
+  width: 55%;
+  position: relative;
+}

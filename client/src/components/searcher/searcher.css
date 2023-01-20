@@ -1,0 +1,14 @@
+.form{
+    display: flex;
+    float: left;
+    flex-direction: row;
+    width: 30%
+}
+
+
+
+.resultados{
+    border: 1px solid black;
+    height: 400px;
+    width: 600px;
+}

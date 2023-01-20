@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Mom';
+    src: url('../../assets/fonts/Mom.ttf');
+}
+
+.divisor{
+    background-attachment: fixed;
+    background-image: url('../../assets/img/background1.jpg');
+    height: 800px;
+    margin-top: 200px;
+    width: 100%;
+    
+}
+.title{
+   
+    font-family: 'Mom';
+    margin-left: 28%;
+    padding: 3rem;
+}
+

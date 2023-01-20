@@ -1,0 +1,40 @@
+
+
+.pray{
+    border-radius: 4px;
+    height: 90px;
+    width: 120px;
+}
+
+
+  button {
+    background-color: #3b3b44 !important;
+    border: none !important;
+    
+  }
+  
+  button:hover {
+    background-color: #464649 !important;
+    border: none !important;
+  }
+  
+  .item {
+    border-radius: 3px;
+    padding: 1rem!important;
+    background-color: #26262c;
+  }
+  
+  .bg-form-dark {
+    background-color: #1f1f23 !important;
+  }
+  
+  .btn-add-item {
+    background-color: gray !important;
+    border-color: #fefefe !important;
+    margin-top: 10px;
+  }
+  
+  .btn-add-item:hover {
+    background-color: #29292a !important;
+    border-color: #5c16c5 !important;
+  }
