@@ -8,7 +8,7 @@ const con = mysql.createConnection({
 });
 
 
-function insertUser(req, callback) {
+function insertUser(req, res, callback) {
     const nameExp = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
     const surExp = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
     const nickExp = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
@@ -35,6 +35,7 @@ function insertUser(req, callback) {
     ) {
         console.log('Datos incorrectos')
     } else {
+        const post = ['"'+nameReg+'"','"'+ surNameReg+'"','"'+ nickReg+'"','"'+ emailReg+'"','"'+ passReg+'"','"'+ confirmPass+'"','"'+ descriptionReg+'"'];
         bcrypt.hash(passReg, 10, (err, passSecretaEncriptada) => {
             if (err) {
             } else {
@@ -42,10 +43,13 @@ function insertUser(req, callback) {
 
             }
           
-            let insertUser = `INSERT INTO users (user_id, name_u, surname, nick, email, password_u, description_u) VALUES(NULL, ${nameReg}, ${surNameReg}, ${nickReg}, ${emailReg}, ${passReg}, ${confirmPass}, ${descriptionReg})`
-            con.query(insertUser, function (err, result)  {
-                if(err) throw err;
-                callback(result)
+            let insertUser = `INSERT INTO users (name_u, surname, nick, email, password_u, confirm_password, description_u) VALUES( ${post})`
+            con.query(insertUser, function (err, req, res)  {
+                if (err) {
+                    throw err
+                }
+            
+                console.log('Añadido')
             })
         });
       
