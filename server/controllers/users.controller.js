@@ -1,20 +1,18 @@
 const mysql = require('mysql');
 const bcrypt = require('bcrypt');
-const con = mysql.createConnection({
+const connection = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE
 });
-
-
 function insertUser(req, res, callback) {
-    const nameExp = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
-    const surExp = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
-    const nickExp = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
-    const emailExp = new RegExp(/[^@]+@[^@]+\.[a-zA-Z]{2,}/);
-    const passExp = new RegExp(/(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}/);
-    const descriptionExp = new RegExp(/^([A-Za-z]{1,500})/);
+    const nameExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
+    const surExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
+    const nickExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
+    const emailExpression = new RegExp(/[^@]+@[^@]+\.[a-zA-Z]{2,}/);
+    const passExpression = new RegExp(/(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}/);
+    const descriptionExpression = new RegExp(/^([A-Za-z]{1,500})/);
     const {
         nameReg,
         surNameReg,
@@ -25,41 +23,39 @@ function insertUser(req, res, callback) {
         descriptionReg
     } = req.body;
     if (
-        !nameExp.test(nameReg) ||
-        !surExp.test(surNameReg) ||
-        !nickExp.test(nickReg) ||
-        !emailExp.test(emailReg) ||
-        !passExp.test(passReg) ||
-        !descriptionExp.test(descriptionReg) ||
+        !nameExpression.test(nameReg) ||
+        !surExpression.test(surNameReg) ||
+        !nickExpression.test(nickReg) ||
+        !emailExpression.test(emailReg) ||
+        !passExpression.test(passReg) ||
+        !descriptionExpression.test(descriptionReg) ||
         passReg != confirmPass
     ) {
         console.log('Datos incorrectos')
     } else {
-        const post = ['"'+nameReg+'"','"'+ surNameReg+'"','"'+ nickReg+'"','"'+ emailReg+'"','"'+ passReg+'"','"'+ confirmPass+'"','"'+ descriptionReg+'"'];
+       
         bcrypt.hash(passReg, 10, (err, passSecretaEncriptada) => {
             if (err) {
             } else {
                 passEncriptada = passSecretaEncriptada;
-
             }
-          
-            let insertUser = `INSERT INTO users (name_u, surname, nick, email, password_u, confirm_password, description_u) VALUES( ${post})`
-            con.query(insertUser, function (err, req, res)  {
+            let userJson = {
+                passReg: passEncriptada,
+                confirmPass: passEncriptada
+            }
+            
+            const dataNewUser = ['"'+nameReg+'"','"'+ surNameReg+'"','"'+ nickReg+'"','"'+ emailReg+'"','"'+ userJson.passReg+'"','"'+ userJson.confirmPass+'"','"'+ descriptionReg+'"'];
+            let insertUser = `INSERT INTO users (name_u, surname, nick, email, password_u, confirm_password, description_u) VALUES(${dataNewUser})`
+            connection.query(insertUser, function (err, req, res)  {
                 if (err) {
                     throw err
                 }
             
-                console.log('Añadido')
+                console.log('New user registered')
             })
         });
-      
-        
     }
-    
-      
-   
 } 
-
 module.exports = {
     insertUser
 };
