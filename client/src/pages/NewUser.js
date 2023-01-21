@@ -8,7 +8,7 @@ const NewUser = () => {
     <div>
         <Navbar />
         <Registration />
-        <Footer />
+        {/* <Footer /> */}
     </div>
   )
 }

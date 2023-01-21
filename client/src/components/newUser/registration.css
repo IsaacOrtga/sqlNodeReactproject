@@ -1,0 +1,25 @@
+.generalContainerRegistration{
+    flex-direction: row;
+
+}
+.regContainer{
+    align-items: center;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.inputRegistration{
+    border-radius: 5px;
+    margin-bottom: 1.5%;
+    margin-top: 1.5%;
+    padding: 5px;
+    width: 80%;
+}
+.inputRegistration::-webkit-input-placeholder {
+    text-align: center;
+    line-height: 100px;/* Centrado vertical */
+  }
+  .button{
+    margin-bottom: 5%;
+  }
