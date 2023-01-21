@@ -1,28 +1,43 @@
-.generalContainerRegistration{
-    flex-direction: row;
+.generalContainerRegistration {
+  flex-direction: row;
+  display: flex;
+}
+.regContainer {
+  align-items: center;
 
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
-.regContainer{
-    align-items: center;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
+form {
+  text-align: center;
 }
-form{
-    text-align: center;
-}
-.inputRegistration{
-    border-radius: 5px;
-    margin-bottom: 1.5%;
-    margin-top: 1.5%;
-    padding: 5px;
-    width: 80%;
+.inputRegistration {
+  border-radius: 5px;
+  margin-bottom: 1.5%;
+  margin-top: 1.5%;
+  padding: 5px;
+  width: 80%;
 }
 .inputRegistration::-webkit-input-placeholder {
-    text-align: center;
-    line-height: 100px;/* Centrado vertical */
-  }
-  .button{
-    margin-bottom: 5%;
-  }
+  text-align: center;
+  line-height: 100px; /* Centrado vertical */
+}
+.button {
+  margin-bottom: 5%;
+}
+.hobbieImageContainer {
+  width: 50%;
+}
+.hobbieImageContainer img{
+    width: 100%;
+}
+.hobbieImageContainer a{
+    color: gray;
+    float: right;
+    font-size: 10px;
+    text-decoration: none;
+}
+.hobbieImageContainer a:hover{
+    color: blue;
+}
