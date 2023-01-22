@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Hobbies from '../../assets/img/hobbies.png';
 import './registration.css';
@@ -11,25 +10,25 @@ const Registration = () => {
     const [surName, setSurName] = useState('');
     const [alias, setAlias] = useState('');
     const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
-    const [confirmPass, setConfirmPass] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        validateReg(name, surName, alias, email, pass, confirmPass)
-        const resquestOptions = {
+        // validateReg(name, surName, alias, email, password, confirmPassword)
+        const resquestOptions = await {
             method: "POST",
             headers: { "Content-Type": "applicaciont/json" },
             body: JSON.stringify({
-                nameReg: name,
-                surNameReg: surName,
-                nickReg: alias,
-                emailReg: email,
-                passReg: pass,
-                confirmPass: confirmPass,
+                name_u: name,
+                surname: surName,
+                nick: alias,
+                email: email,
+                password_u: password,
+                confirm_password: confirmPassword,
             }),
         };
-        fetch("newUser", resquestOptions)
+        await fetch("newUser", resquestOptions)
         .then((res) => res.json())
         .then((res) => {
             if(res.newUser) {
@@ -40,22 +39,22 @@ const Registration = () => {
             
         })
     }
-    function validateReg(name, surName, alias, email, pass, confirmPass) {
-        const nameExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
-        const surExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
-        const aliasExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
-        const emailExpression = new RegExp(/[^@]+@[^@]+\.[a-zA-Z]{2,}/);
-        const passExpression = new RegExp(/(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}/); 
-        if(!nameExpression.test(name) ||
-        !surExpression.test(surName) ||
-        !aliasExpression.test(alias) ||
-        !emailExpression.test(email) ||
-        !passExpression.test(pass) ||
-        pass !== confirmPass) 
-        {
-            alert('Datos no válidos')
-        }
-    }
+    // function validateReg(name, surName, alias, email, pass, confirmPass) {
+    //     const nameExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
+    //     const surExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
+    //     const aliasExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
+    //     const emailExpression = new RegExp(/[^@]+@[^@]+\.[a-zA-Z]{2,}/);
+    //     const passExpression = new RegExp(/(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,10}/); 
+    //     if(!nameExpression.test(name) ||
+    //     !surExpression.test(surName) ||
+    //     !aliasExpression.test(alias) ||
+    //     !emailExpression.test(email) ||
+    //     !passExpression.test(password) ||
+    //     password !== confirmPassword) 
+    //     {
+    //         alert('Datos no válidos')
+    //     }
+    // }
     function showPass() {
         var tipo = document.getElementById("pass1");
         var tipo2 = document.getElementById("pass2");
@@ -111,8 +110,8 @@ const Registration = () => {
                         id="pass1"
                         pattern="(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}"
                         title="La contraseña ha de tener al menos una mayúscula, minúculas y un número. Mínimo 6 caracteres, máximo 16."
-                        value={pass}
-                        onChange={e => setPass(e.target.value)}
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
                     />
                     <input
                         type="password"
@@ -121,8 +120,8 @@ const Registration = () => {
                         className="inputRegistration"
                         id="pass2"
                         title="Repita la contraseña"
-                        value={confirmPass}
-                        onChange={e => setConfirmPass(e.target.value)}
+                        value={confirmPassword}
+                        onChange={e => setConfirmPassword(e.target.value)}
                     />
                     <label htmlFor="checkboxPass">Mostrar contraseñas</label>
                     <input
