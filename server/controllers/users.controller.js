@@ -20,16 +20,16 @@ async function insertUser(req, res) {
     ) {
         console.log('Datos incorrectos')
     } else {
-            // const passwordHash = await encrypt(password_u);
-            // const passwordHash2 = await encrypt(confirm_password);
+            const passwordHash = await encrypt(password_u);
+            const passwordHash2 = await encrypt(confirm_password);
             let insertUser = "INSERT INTO users (`name_u`, `surname`, `alias`, `email`, `password_u`, `confirm_password`) VALUES(?)"
             const values = [
                 name_u,
                 surname,
                 alias,
                 email,
-                password_u,
-                confirm_password,
+                passwordHash,
+                passwordHash2,
             ]
             connection.query(insertUser, [values], function (err, req, res, callback)  {
                 if (err) {

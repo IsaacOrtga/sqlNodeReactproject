@@ -15,7 +15,7 @@ const Registration = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        // validateReg(name, surname, alias, email, password_u, confirm_password)
+        validateReg(name_u, surname, alias, email, password_u, confirm_password)
         const requestInfo = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -39,22 +39,22 @@ const Registration = () => {
 
             })
     }
-    //  function validateReg(name, surname, alias, email, password_u, confirm_password) {
-    //      const nameExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
-    //      const surExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
-    //      const aliasExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
-    //      const emailExpression = new RegExp(/[^@]+@[^@]+\.[a-zA-Z]{2,}/);
-    //      const passExpression = new RegExp(/(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,10}/); 
-    //      if(!nameExpression.test(name) ||
-    //      !surExpression.test(surname) ||
-    //      !aliasExpression.test(alias) ||
-    //      !emailExpression.test(email) ||
-    //      !passExpression.test(password_u) ||
-    //      password_u !== confirm_password) 
-    //      {
-    //          alert('Datos no válidos')
-    //      }
-    //  }
+      function validateReg(name_u, surname, alias, email, password_u, confirm_password) {
+          const nameExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
+          const surExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
+          const aliasExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
+          const emailExpression = new RegExp(/[^@]+@[^@]+\.[a-zA-Z]{2,}/);
+          const passExpression = new RegExp(/(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,10}/); 
+          if(!nameExpression.test(name_u) ||
+          !surExpression.test(surname) ||
+          !aliasExpression.test(alias) ||
+          !emailExpression.test(email) ||
+          !passExpression.test(password_u) ||
+          password_u !== confirm_password) 
+          {
+              alert('Datos no válidos')
+          }
+      }
     function showPass() {
         var tipo = document.getElementById("pass1");
         var tipo2 = document.getElementById("pass2");
