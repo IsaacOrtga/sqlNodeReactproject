@@ -1,23 +1,31 @@
 const mysql = require('mysql');
-const { compare } = require('../helpers/handleBcrypt.js');
+const bcrypt = require('bcryptjs');
+const compare  = require('../helpers/handleBcrypt.js');
 const connection = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE
 });
-async function getUser(req, res){
+function getUser(req, res){
     const {
         email,
-        password,
+        password_u,
     } = req.body;
     let searchUserInfo = `SELECT * FROM users WHERE email = ?`
-    connection.query(searchUserInfo, [email], async (error, results, fields) => {
+    connection.query(searchUserInfo, [email], (error, results, fields) => {
       
         if(error) {
             return console.error(error.message);
         }
-        console.log(results)
+        const hash = results[0].password_u;
+        bcrypt.compare(password_u, hash, function(err, ok){
+            if(!err && ok){
+                console.log(results)
+            }
+        })
+      
+       
     })
     
 }
