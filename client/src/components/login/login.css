@@ -1,0 +1,16 @@
+
+.generalLoginContainer{
+    height: 100%;
+    width: 100%;
+}
+.loginContainer{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    margin: 0 auto; 
+    
+}
+#recovery{
+    margin-top: 5%;
+}

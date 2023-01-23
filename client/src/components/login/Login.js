@@ -1,33 +1,26 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
-
+import './login.css';
 function Login() {
-
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
-
-    function sendLogin() {
-
+    const [password_u, setPassword] = useState('');
+    function loggedIn() {
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                emailLog: email,
-                passLog: pass
+                email,
+                password_u,
 
             }),
         };
-
         fetch('login', requestOptions)
             .then((response) => response.json())
             .then((res) => {
-              
-    
+
+
                 if (res.loggedIn) {
                     localStorage.setItem('email', email)
                     navigate('/')
@@ -37,55 +30,51 @@ function Login() {
                 }
             });
     }
-
-
     function showPass() {
-        var tipo = document.getElementById("pass");
+        var tipo = document.getElementById("pass1");
         if (tipo.type === "password") {
             tipo.type = "text";
         } else {
             tipo.type = "password";
         }
     };
-
-
     return (
-        <div className='loginContainer' style={{ border: "1px solid black", height: 270, margin: "0 auto", width: "28%" }}>
+        <div className='generalLoginContainer'>
+            <div className='loginContainer'>
 
-            <FloatingLabel
-                style={{ width: 300 }}
-                controlId="floatingInput"
-                label="Dirección de e-mail"
-                className="mb-3 mt-4 ms-4">
-                <Form.Control
+                <input
                     type="email"
-                    placeholder="name@example.com"
-                onChange={(e) => setEmail(e.target.value)}
+                    name="email"
+                    placeholder='e-mail'
+                    className="inputRegistration"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
-            </FloatingLabel>
-
-            <FloatingLabel
-                style={{ width: 300 }}
-                controlId="floatingPassword"
-                label="Contraseña"
-                className="mb-3 mt-4 ms-4">
-                <Form.Control
-                    id="pass"
+                <input
                     type="password"
-                    placeholder="Password"
-                onChange={(e) => setPass(e.target.value)}
+                    name="pass"
+                    placeholder='contraseña'
+                    className="inputRegistration"
+                    id="pass1"
+                    pattern="(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}"
+                    title="La contraseña ha de tener al menos una mayúscula, minúculas y un número. Mínimo 6 caracteres, máximo 16."
+                    value={password_u}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
-            </FloatingLabel>
+                <label htmlFor="checkboxPass">Mostrar contraseñas</label>
+                <input
+                    type="checkbox"
+                    name='checkboxPass'
+                    className="inputRegistration"
+                    onClick={showPass}
+                />
+                <Button className='ms-4 mt-2' variant="success" size="sm" type="submit" style={{ width: "30%" }} onClick={loggedIn}>
+                    Iniciar sesión
+                </Button>
+                <a id="recovery" href='#'>He olvidado mi contraseña</a>
 
-            <Form.Check type="checkbox" label="Mostrar contraseña" className='ms-4 mt-2' onClick={showPass} />
-
-
-            <Button className='ms-4 mt-2' variant="success" size="sm" type="submit" style={{ width: "30%" }} onClick={ sendLogin }>
-                Iniciar sesión
-            </Button>
-
-            <a id="recovery" className='ms-3' href='#'>He olvidado mi contraseña</a>
-
+            </div>
+            <a href="https://www.freepik.es/vector-gratis/equipo-negocios-armando-rompecabezas-aislado-ilustracion-vectorial-plana-socios-dibujos-animados-que-trabajan-conexion-concepto-trabajo-equipo-asociacion-cooperacion_10606197.htm#query=comunidad&position=2&from_view=search&track=sph">Imagen de pch.vector en Freepik</a> 
         </div>
     );
 }

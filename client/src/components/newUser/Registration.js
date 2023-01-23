@@ -31,12 +31,8 @@ const Registration = () => {
         fetch("newUser", requestInfo)
             .then((res) => res.json())
             .then((res) => {
-     
-                    localStorage.setItem('email', email);
-                    console.log('Registrado Usuario Nuevo desde React')
+                    console.log(res)
                     navigate('/')
-           
-
             })
     }
       function validateReg(name_u, surname, alias, email, password_u, confirm_password) {
