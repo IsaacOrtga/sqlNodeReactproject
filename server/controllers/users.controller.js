@@ -8,31 +8,30 @@ const connection = mysql.createConnection({
 });
 async function insertUser(req, res) {
     const {
-        name,
+        name_u,
         surname,
         alias,
         email,
-        password,
-        confirmPassword,
-        // descriptionReg
+        password_u,
+        confirm_password,
     } = req.body;
     if (
-        password != confirmPassword
+        password_u != confirm_password
     ) {
         console.log('Datos incorrectos')
     } else {
-        // const passwordHash = await encrypt(passReg);
-        // const passwordHash2 = await encrypt(confirmPass);
-            let insertUser = "INSERT INTO users (`name_u`, `surname`, `nick`, `email`, `password_u`, `confirm_password`) VALUES(?)"
+            // const passwordHash = await encrypt(password_u);
+            // const passwordHash2 = await encrypt(confirm_password);
+            let insertUser = "INSERT INTO users (`name_u`, `surname`, `alias`, `email`, `password_u`, `confirm_password`) VALUES(?)"
             const values = [
-                name,
+                name_u,
                 surname,
                 alias,
                 email,
-                password,
-                confirmPassword,
+                password_u,
+                confirm_password,
             ]
-            connection.query(insertUser, [values], function (err, req, res)  {
+            connection.query(insertUser, [values], function (err, req, res, callback)  {
                 if (err) {
                     throw err
                 }   

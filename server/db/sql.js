@@ -18,11 +18,10 @@ connection.connect((err) => {
 //     user_id INT AUTO_INCREMENT,
 //     name_u VARCHAR (100) NOT NULL,
 //     surname VARCHAR (200) NOT NULL,
-//     nick VARCHAR (30) NOT NULL,
+//     alias VARCHAR (30) NOT NULL,
 //     email NVARCHAR (255) NOT NULL,
 //     password_u VARCHAR (100) NOT NULL,
-//        confirm_password VARCHAR (100) NOT NULL,
-//     description_u VARCHAR(500),
+//     confirm_password VARCHAR (100) NOT NULL,
 //     PRIMARY KEY(user_id)
 // )`;
 // connection.query(createUser, (err, rows) => {
