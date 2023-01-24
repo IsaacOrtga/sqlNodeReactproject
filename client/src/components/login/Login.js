@@ -6,23 +6,23 @@ function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password_u, setPassword] = useState('');
-    function loggedIn() {
-        const requestOptions = {
+    const loggedIn = (e) => {
+        e.preventDefault();
+        const requestLogin = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 email,
                 password_u,
-
             }),
+            
         };
-        fetch('login', requestOptions)
-            .then((response) => response.json())
+       
+        fetch("login", requestLogin)
+            .then((res) => res.json())
             .then((res) => {
-
-
-                if (res.loggedIn) {
-                    localStorage.setItem('email', email)
+                console.log('Hasta aquí')
+                if (res.status) {
                     navigate('/')
                 }
                 else {
@@ -41,7 +41,6 @@ function Login() {
     return (
         <div className='generalLoginContainer'>
             <div className='loginContainer'>
-
                 <input
                     type="email"
                     name="email"
@@ -52,7 +51,7 @@ function Login() {
                 />
                 <input
                     type="password"
-                    name="pass"
+                    name="password_u"
                     placeholder='contraseña'
                     className="inputRegistration"
                     id="pass1"
@@ -68,10 +67,16 @@ function Login() {
                     className="inputRegistration"
                     onClick={showPass}
                 />
-                <Button className='ms-4 mt-2' variant="success" size="sm" type="submit" style={{ width: "30%" }} onClick={loggedIn}>
-                    Iniciar sesión
+                <Button
+                    className='button ms-4 mt-2'
+                    variant="success"
+                    size="sm"
+                    type="submit"
+                    style={{ width: "30%" }}
+                    onClick={loggedIn}>
+                    Iniciar Sesión
                 </Button>
-                <a id="recovery" href='#'>He olvidado mi contraseña</a>
+                {/* <a id="recovery" href='#'>He olvidado mi contraseña</a> */}
 
             </div>
             <a href="https://www.freepik.es/vector-gratis/equipo-negocios-armando-rompecabezas-aislado-ilustracion-vectorial-plana-socios-dibujos-animados-que-trabajan-conexion-concepto-trabajo-equipo-asociacion-cooperacion_10606197.htm#query=comunidad&position=2&from_view=search&track=sph">Imagen de pch.vector en Freepik</a> 
