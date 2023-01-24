@@ -4,6 +4,7 @@ import Home from '../pages/Home'
 import NewUser from "../pages/NewUser";
 import { Schedule } from "../pages/Schedule";
 import User from '../pages/User'
+import Dashboard from "./dashboard/Dashboard";
 
 
 const Main = () => {
@@ -15,6 +16,7 @@ const Main = () => {
                <Route path="/schedule" element = {<Schedule />} />
                <Route path="/user" element = {<User/>}/>
                <Route path="/newuser" element = {<NewUser />}/>
+               <Route path="/dashboard" element = {<Dashboard />}/>
             </Routes>
 
         </div>

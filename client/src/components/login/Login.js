@@ -1,34 +1,40 @@
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from 'universal-cookie';
 import Button from 'react-bootstrap/Button';
 import './login.css';
 function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password_u, setPassword] = useState('');
-    const loggedIn = (e) => {
-        e.preventDefault();
-        const requestLogin = {
+    const [user_id, setUserId ] = useState('');
+    const loggedIn = (req, res, next) => {
+        // e.preventDefault();
+        const requestSearch = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                email,
-                password_u,
+                email: email,
+                password_u: password_u
             }),
             
         };
+   fetch("login", requestSearch)
+   .then((response) => response.json())
+   .then(res => {
+    console.log(res)
+    if (res.status) {
+    
+        navigate('/')
+      
        
-        fetch("login", requestLogin)
-            .then((res) => res.json())
-            .then((res) => {
-                console.log('Hasta aquí')
-                if (res.status) {
-                    navigate('/')
-                }
-                else {
-                    alert('Usuario no registrado')
-                }
-            });
+
+    } else {
+        alert('Usuario no registrado')
+    }
+
+})
+      
     }
     function showPass() {
         var tipo = document.getElementById("pass1");
@@ -46,7 +52,6 @@ function Login() {
                     name="email"
                     placeholder='e-mail'
                     className="inputRegistration"
-                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
@@ -57,7 +62,6 @@ function Login() {
                     id="pass1"
                     pattern="(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}"
                     title="La contraseña ha de tener al menos una mayúscula, minúculas y un número. Mínimo 6 caracteres, máximo 16."
-                    value={password_u}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <label htmlFor="checkboxPass">Mostrar contraseñas</label>

@@ -13,10 +13,10 @@ const Registration = () => {
     const [password_u, setPassword] = useState('');
     const [confirm_password, setConfirmPassword] = useState('');
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         validateReg(name_u, surname, alias, email, password_u, confirm_password)
-        const requestInfo = {
+        const requestInfo = await {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -28,29 +28,33 @@ const Registration = () => {
                 confirm_password
             }),
         };
-        fetch("newUser", requestInfo)
-            .then((res) => res.json())
+        await fetch("newUser", requestInfo)
+            .then((response) => response.json())
             .then((res) => {
+                if (res.newUser) {
+                    console.log('LLEGA AQUÍ')
                     console.log(res)
                     navigate('/')
+
+                }
+
             })
     }
-      function validateReg(name_u, surname, alias, email, password_u, confirm_password) {
-          const nameExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
-          const surExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
-          const aliasExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
-          const emailExpression = new RegExp(/[^@]+@[^@]+\.[a-zA-Z]{2,}/);
-          const passExpression = new RegExp(/(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,10}/); 
-          if(!nameExpression.test(name_u) ||
-          !surExpression.test(surname) ||
-          !aliasExpression.test(alias) ||
-          !emailExpression.test(email) ||
-          !passExpression.test(password_u) ||
-          password_u !== confirm_password) 
-          {
-              alert('Datos no válidos')
-          }
-      }
+    function validateReg(name_u, surname, alias, email, password_u, confirm_password) {
+        const nameExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
+        const surExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
+        const aliasExpression = new RegExp(/[a-zA-Z\u00C0-\u017F]/);
+        const emailExpression = new RegExp(/[^@]+@[^@]+\.[a-zA-Z]{2,}/);
+        const passExpression = new RegExp(/(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,10}/);
+        if (!nameExpression.test(name_u) ||
+            !surExpression.test(surname) ||
+            !aliasExpression.test(alias) ||
+            !emailExpression.test(email) ||
+            !passExpression.test(password_u) ||
+            password_u !== confirm_password) {
+            alert('Datos no válidos')
+        }
+    }
     function showPass() {
         var tipo = document.getElementById("pass1");
         var tipo2 = document.getElementById("pass2");
@@ -138,6 +142,7 @@ const Registration = () => {
                 </Button>
 
             </div>
+            { name_u ? <h1>'Bienvenido'</h1> : <h1>Nada</h1>}
             <div className='hobbieImageContainer'>
                 <img src={Hobbies} alt='hobbies' />
                 <a href="https://www.freepik.es/vector-gratis/persona-joven-aficiones-e-intereses-ilustrados_12979459.htm#query=hobbies&position=2&from_view=search&track=sph">Imagen de Freepik</a>

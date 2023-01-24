@@ -22,7 +22,7 @@ async function insertUser(req, res) {
     } else {
             const passwordHash = await encrypt(password_u);
             const passwordHash2 = await encrypt(confirm_password);
-            let insertUser = "INSERT INTO users (`name_u`, `surname`, `alias`, `email`, `password_u`, `confirm_password`) VALUES(?)"
+            let newUser = "INSERT INTO users (`name_u`, `surname`, `alias`, `email`, `password_u`, `confirm_password`) VALUES(?)"
             const values = [
                 name_u,
                 surname,
@@ -31,12 +31,21 @@ async function insertUser(req, res) {
                 passwordHash,
                 passwordHash2,
             ]
-            connection.query(insertUser, [values], function (err, req, res, callback)  {
+            connection.query(newUser, [values], function (err, req, res, next, callback)  {
                 if (err) {
                     throw err
-                }   
-                console.log('New user registered')
+                }   else{
+
+                
+                    console.log('Registrado')
+                     
+                }
+                
+                
+         
+      
             })
+         
     }
 }
 module.exports = {
