@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
-import Cookies from 'universal-cookie';
+import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import './login.css';
 function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password_u, setPassword] = useState('');
-    const [user_id, setUserId ] = useState('');
+
     const loggedIn = (req, res, next) => {
         // e.preventDefault();
         const requestSearch = {
@@ -22,10 +21,10 @@ function Login() {
    fetch("login", requestSearch)
    .then((response) => response.json())
    .then(res => {
-    console.log(res)
     if (res.status) {
-    
-        navigate('/')
+     
+     
+        navigate('/dashboard')
       
        
 

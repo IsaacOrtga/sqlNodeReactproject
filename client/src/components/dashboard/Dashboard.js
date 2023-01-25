@@ -6,7 +6,7 @@ export const Dashboard = () => {
     const cookies = new Cookies();
   return (
     <div>
-        <h3>Id Usuario: {cookies.get('idUsuario')}</h3>
+        <h3>Id Usuario: {cookies.get('user_id')}</h3>
     </div>
   )
 }

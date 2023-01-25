@@ -31,21 +31,19 @@ async function insertUser(req, res) {
                 passwordHash,
                 passwordHash2,
             ]
-            connection.query(newUser, [values], function (err, req, res, next, callback)  {
+            await connection.query(newUser, [values], function (err, req, res, next, callback)  {
                 if (err) {
                     throw err
                 }   else{
-
-                
-                    console.log('Registrado')
-                     
+                    console.log('New user inserted')
+                    
                 }
                 
                 
-         
+           
       
             })
-         
+          
     }
 }
 module.exports = {
