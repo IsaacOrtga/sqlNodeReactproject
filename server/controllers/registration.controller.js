@@ -6,7 +6,8 @@ const connection = mysql.createConnection({
     password: process.env.PASSWORD,
     database: process.env.DATABASE
 });
-async function insertUser(req, res) {
+
+async function insertUser(req, res, next) {
     const {
         name_u,
         surname,
@@ -15,35 +16,33 @@ async function insertUser(req, res) {
         password_u,
         confirm_password,
     } = req.body;
-    if (
-        password_u != confirm_password
-    ) {
-        console.log('Datos incorrectos')
+    if (password_u !== confirm_password) {
+        console.log('Datos incorrectos');
+        return res.status(400).json({ status: false, message: 'Password and confirm password do not match' });
     } else {
-            const passwordHash = await encrypt(password_u);
-            const passwordHash2 = await encrypt(confirm_password);
-            let newUser = "INSERT INTO users (`name_u`, `surname`, `alias`, `email`, `password_u`, `confirm_password`) VALUES(?)"
-            const values = [
-                name_u,
-                surname,
-                alias,
-                email,
-                passwordHash,
-                passwordHash2,
-            ]
-            await connection.query(newUser, [values], function (err, req, res, next, callback)  {
-                if (err) {
-                    throw err
-                }   else{
-                    console.log('New user inserted')
-                    
-                }
-                
-                
-           
-      
-            })
-          
+        const passwordHash = await encrypt(password_u);
+        const passwordHash2 = await encrypt(confirm_password);
+        let callDataUser = "INSERT INTO users (name_u, surname, alias, email, password_u, confirm_password) VALUES(?)"
+        const values = [
+            name_u,
+            surname,
+            alias,
+            email,
+            passwordHash,
+            passwordHash2,
+        ]
+        await connection.query(callDataUser, [values], function (err, result) {
+            if (err) {
+                throw err
+            } else {
+                console.log('New user inserted')
+            }
+        });
+
+        res.cookie('name_u', `${name_u}`)
+        res.cookie('surname', `${surname}`)
+        res.cookie('alias', `${alias}`)
+        res.redirect('/');
     }
 }
 module.exports = {
