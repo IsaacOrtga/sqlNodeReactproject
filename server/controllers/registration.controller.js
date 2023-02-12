@@ -33,16 +33,22 @@ async function insertUser(req, res, next) {
         ]
         await connection.query(callDataUser, [values], function (err, result) {
             if (err) {
-                throw err
+                console.error(err);
+                return res.status(500).json({ status: false, message: 'Error al insertar el usuario en la base de datos' });
             } else {
                 console.log('New user inserted')
             }
+
+            res.cookie('name_u', `${name_u}`)
+            res.cookie('surname', `${surname}`)
+            res.cookie('alias', `${alias}`)
+            res.json({status: true})
+            connection.end();
         });
 
-        res.cookie('name_u', `${name_u}`)
-        res.cookie('surname', `${surname}`)
-        res.cookie('alias', `${alias}`)
-        res.redirect('/');
+
+        const cookies = req.cookies;
+        // res.redirect('/');
     }
 }
 module.exports = {

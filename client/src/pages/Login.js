@@ -4,15 +4,15 @@ import Footer from '../components/footer/Footer.js'
 // import ImgPerfil from '../components/user/Imgperfil'
 import Login from '../components/login/Login'
 
-const User = () => {
+const LoginPage = () => {
   return (
     <div>
         <Navbar />
         {/* <ImgPerfil /> */}
         <Login />
-        <Footer />
+        {/* <Footer /> */}
     </div>
   )
 }
 
-export default User;
+export default LoginPage;

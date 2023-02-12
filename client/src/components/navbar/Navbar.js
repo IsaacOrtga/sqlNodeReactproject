@@ -3,15 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-
-
-
-function ColorSchemesExample() {
-
-const logout = () => {
-  localStorage.removeItem('email');
-}
-
+function ColorSchemesExample({user}) {
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -22,11 +14,7 @@ const logout = () => {
             <Nav.Link href="/Schedule">Eventos</Nav.Link>
           </Nav>
         </Container>
-  
-
-
-
-          {localStorage.getItem('email') ? <Nav className='ms-auto'><Nav.Link href="/myarea">Área de usuari@</Nav.Link></Nav>
+          {user ? <Nav className='ms-auto'><Nav.Link href="/dashboard">{user}</Nav.Link></Nav>
             :     
              <div className='me-5'>
             <Dropdown>
@@ -41,7 +29,7 @@ const logout = () => {
             </div>
           }
 
-{localStorage.getItem('email') ? <Nav className='ms-2' onClick={ logout }><Nav.Link href='/'>Log-out</Nav.Link></Nav> : ''}
+{localStorage.getItem('email') ? <Nav className='ms-2' ><Nav.Link href='/'>Log-out</Nav.Link></Nav> : ''}
 
 
 

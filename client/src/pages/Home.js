@@ -13,7 +13,7 @@ import Cover from '../components/cover/Cover.js'
             <Search />
             <Mapa />
             <Cover />
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }

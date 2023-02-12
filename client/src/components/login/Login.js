@@ -7,8 +7,8 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password_u, setPassword] = useState('');
 
-    const loggedIn = (req, res, next) => {
-        // e.preventDefault();
+    const loggedIn = (e, req, res, next) => {
+        e.preventDefault();
         const requestSearch = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -18,22 +18,15 @@ function Login() {
             }),
             
         };
-   fetch("login", requestSearch)
+   fetch("login", requestSearch) 
    .then((response) => response.json())
    .then(res => {
-    if (res.status) {
-     
-     
-        navigate('/dashboard')
-      
-       
-
+    if (res.status === true) {       
+        navigate('/dashboard');
     } else {
-        alert('Usuario no registrado')
+        navigate('');
     }
-
 })
-      
     }
     function showPass() {
         var tipo = document.getElementById("pass1");

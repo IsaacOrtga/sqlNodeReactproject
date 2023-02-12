@@ -7,7 +7,7 @@ export const Schedule = () => {
     <div>
         <Navbar />
         <Calendar />
-        <Footer />
+        {/* <Footer /> */}
     </div>
   )
 }

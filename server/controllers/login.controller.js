@@ -37,12 +37,16 @@ async function getUser(req, res, next){
                     status: false,
                     message: 'Email o contraseña incorrectos'
                 });
+                
             }
             res.cookie('user_id', user_id);
             res.cookie('name_u', name_u);
             res.cookie('surname', surname);
             res.cookie('alias', alias);
-            res.redirect('/');
+            res.cookie('alias', alias);
+            res.cookie('alias', alias);
+            res.json({status: true})
+            connection.end();
         });
     });
 }

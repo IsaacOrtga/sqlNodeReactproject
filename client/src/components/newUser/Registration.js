@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Hobbies from '../../assets/img/hobbies.png';
+
 import './registration.css';
 const Registration = () => {
     const navigate = useNavigate();
@@ -12,6 +13,9 @@ const Registration = () => {
     const [email, setEmail] = useState('');
     const [password_u, setPassword] = useState('');
     const [confirm_password, setConfirmPassword] = useState('');
+    const [user, setUser] = useState('');
+
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -31,11 +35,10 @@ const Registration = () => {
         await fetch("newUser", requestInfo)
             .then((response) => response.json())
             .then((res) => {
-                if (res.newUser) {
-                    console.log('LLEGA AQUÍ')
-                    console.log(res)
-                    navigate('/')
-
+                if (res.status === true) {       
+                    navigate('/dashboard');
+                } else {
+                    navigate('');
                 }
 
             })
@@ -67,87 +70,89 @@ const Registration = () => {
         }
     };
     return (
-        <div className='generalContainerRegistration'>
-            <div className='regContainer'>
-                <h3>Bienvenido a la comunidad de <span>Plans</span></h3>
+        <>
+            
+            <div className='generalContainerRegistration'>
+                <div className='regContainer'>
+                    <h3>Bienvenido a la comunidad de <span>Plans</span></h3>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder='nombre'
+                        className="inputRegistration"
+                        value={name_u}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        name="surName"
+                        placeholder='apellidos'
+                        className="inputRegistration"
+                        value={surname}
+                        onChange={(e) => setSurname(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        name="alias"
+                        placeholder='alias'
+                        className="inputRegistration"
+                        value={alias}
+                        onChange={(e) => setAlias(e.target.value)}
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder='e-mail'
+                        className="inputRegistration"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        name="pass"
+                        placeholder='contraseña'
+                        className="inputRegistration"
+                        id="pass1"
+                        pattern="(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}"
+                        title="La contraseña ha de tener al menos una mayúscula, minúculas y un número. Mínimo 6 caracteres, máximo 16."
+                        value={password_u}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        name="confirmPass"
+                        placeholder='repetir contraseña'
+                        className="inputRegistration"
+                        id="pass2"
+                        title="Repita la contraseña"
+                        value={confirm_password}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                    <label htmlFor="checkboxPass">Mostrar contraseñas</label>
+                    <input
+                        type="checkbox"
+                        name='checkboxPass'
+                        className="inputRegistration"
+                        onClick={showPass}>
+                    </input>
+                    <Button
+                        className='button ms-4 mt-2'
+                        variant="success"
+                        size="sm"
+                        type="submit"
+                        style={{ width: "30%" }}
+                        onClick={onSubmit}>
+                        Registrarse
+                    </Button>
 
-                <input
-                    type="text"
-                    name="name"
-                    placeholder='nombre'
-                    className="inputRegistration"
-                    value={name_u}
-                    onChange={(e) => setName(e.target.value)}
-                />
-                <input
-                    type="text"
-                    name="surName"
-                    placeholder='apellidos'
-                    className="inputRegistration"
-                    value={surname}
-                    onChange={(e) => setSurname(e.target.value)}
-                />
-                <input
-                    type="text"
-                    name="alias"
-                    placeholder='alias'
-                    className="inputRegistration"
-                    value={alias}
-                    onChange={(e) => setAlias(e.target.value)}
-                />
-                <input
-                    type="email"
-                    name="email"
-                    placeholder='e-mail'
-                    className="inputRegistration"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    name="pass"
-                    placeholder='contraseña'
-                    className="inputRegistration"
-                    id="pass1"
-                    pattern="(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}"
-                    title="La contraseña ha de tener al menos una mayúscula, minúculas y un número. Mínimo 6 caracteres, máximo 16."
-                    value={password_u}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <input
-                    type="password"
-                    name="confirmPass"
-                    placeholder='repetir contraseña'
-                    className="inputRegistration"
-                    id="pass2"
-                    title="Repita la contraseña"
-                    value={confirm_password}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-                <label htmlFor="checkboxPass">Mostrar contraseñas</label>
-                <input
-                    type="checkbox"
-                    name='checkboxPass'
-                    className="inputRegistration"
-                    onClick={showPass}>
-                </input>
-                <Button
-                    className='button ms-4 mt-2'
-                    variant="success"
-                    size="sm"
-                    type="submit"
-                    style={{ width: "30%" }}
-                    onClick={onSubmit}>
-                    Registrarse
-                </Button>
+                </div>
+                <div className='hobbieImageContainer'>
+                    <img src={Hobbies} alt='hobbies' />
+                    <a href="https://www.freepik.es/vector-gratis/persona-joven-aficiones-e-intereses-ilustrados_12979459.htm#query=hobbies&position=2&from_view=search&track=sph">Imagen de Freepik</a>
+                </div>
 
             </div>
-            { name_u ? <h1>'Bienvenido'</h1> : <h1>Nada</h1>}
-            <div className='hobbieImageContainer'>
-                <img src={Hobbies} alt='hobbies' />
-                <a href="https://www.freepik.es/vector-gratis/persona-joven-aficiones-e-intereses-ilustrados_12979459.htm#query=hobbies&position=2&from_view=search&track=sph">Imagen de Freepik</a>
-            </div>
-        </div>
+        </>
     )
 };
 export default Registration;

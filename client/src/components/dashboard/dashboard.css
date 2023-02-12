@@ -1,0 +1,86 @@
+.generalContainer{
+    display: flex;
+    flex-direction: row;;
+}
+.profileContainer{
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 30%;
+}
+.imageProfileContainer{
+    padding: 10px;
+    width: 60%;
+
+}
+.imageProfileContainer img{
+    border-radius: 50%;
+    height: 160px;
+    width: 180px;
+}
+.generalInformationContainer{
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-top: 10%; 
+}
+.infoProfileContainer{
+    padding: 5%;
+    justify-content: center;
+}
+.infoProfileContainer span{
+    color: #8e8e40;
+    cursor: pointer;
+       
+}
+.commentsContainer{
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-left: 4.95%;
+    width: 30%;
+}
+.comment{
+    padding: 5%;
+}
+.favoritesandPhotosContainer{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-left: 4.95%;
+    width: 30%;
+}
+
+.favoritesContainer{
+    padding: 5%;
+    height: 40%;
+}
+.photosContainer{
+    padding: 5%;
+    height: 40%;
+}
+
+.modal {
+    border: 1px solid black;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    position: fixed;
+    background: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  .box {
+    background: white;
+    opacity: none;
+    border: 1px solid black;
+    height: 500px;
+    width: 500px;
+  }
+  #button {
+    margin-top: 20%;
+  }
