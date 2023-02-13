@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import Navbar from '../navbar/Navbar';
-import Modal from './Modal.js';
+import ButtonModal from './ButtonModal';
 import imagenProfile from '../../assets/img/imgP.jpg';
 import './dashboard.css';
-export const Dashboard = () => {
+
+export const Dashboard = ({ children, showModal, setShowModal, onClose }) => {
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [alias, setAlias] = useState('');
+
   const cookies = new Cookies();
   const nameFromCookie = cookies.get('name_u');
   const surnameFromCookie = cookies.get('surname');
   const aliasFromCookie = cookies.get('alias');
-  const [showModal, setShowModal] = useState(false);
-  const handleClick = () => {
-    setShowModal(true);
-  };
-  const closeModal = () => {
-    setShowModal(false);
-  };
+
+  // const [showModal, setShowModal] = useState(false);
+
+  // const handleClick = () => {
+  //   setShowModal(true);
+  // };
+  // const closeModal = () => {
+  //   setShowModal(false);
+  // };
   useEffect(() => {
     setName(nameFromCookie);
     setSurname(surnameFromCookie);
@@ -42,9 +47,7 @@ export const Dashboard = () => {
               <h6>{name} {surname}</h6>
               <p>Comentarios: Aún no tienes comentarios</p>
               <p>Favoritos: Aún no tienes favoritos</p>
-              <span onClick={handleClick}>Añadir descripción</span>
-              <br></br>
-              <span onClick={handleClick}>Añadir preferencias</span>
+              <ButtonModal />
             </div>
           </div>
         </div>
@@ -72,7 +75,6 @@ export const Dashboard = () => {
             </div>
         </div>
       </div>
-      <Modal onClose={closeModal} show={showModal} />
     </div>
     
     </>
