@@ -32,10 +32,10 @@ z-index: 1;
     padding: 5%;
     justify-content: center;
 }
-.buttonModal p{
-    color: #8e8e40;
-    cursor: pointer;
-       
+.btnModal{
+  width: 100px;
+  color: white;
+  height: 30px;
 }
 .commentsContainer{
     border: 1px solid black;

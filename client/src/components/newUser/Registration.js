@@ -32,11 +32,11 @@ const Registration = () => {
                 confirm_password
             }),
         };
-        await fetch("newUser", requestInfo)
+        await fetch("register", requestInfo)
             .then((response) => response.json())
             .then((res) => {
                 if (res.status === true) {       
-                    navigate('/dashboard');
+                    navigate(`/dashboard/${alias}`);
                 } else {
                     navigate('');
                 }

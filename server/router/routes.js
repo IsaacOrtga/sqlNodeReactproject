@@ -3,14 +3,13 @@ const router = express.Router();
 const newUser = require('../controllers/registration.controller');
 const login = require('../controllers/login.controller');
 const updateUser = require('../controllers/updateUser.controller');
-// const getInfo = require('../controllers/userInfo.controller')
-router.post('/register', function(req, res) {
-     newUser.insert(req, res);
-});
-router.post('/newUser', newUser.insertUser);
+const getInfo = require('../controllers/userInfo.controller')
 
 
+
+router.post('/register', newUser.insertUser);
 router.post('/login', login.getUser);
-router.post('/update', updateUser.updateUser);
-// router.get('/dashboard', getInfo.getInfoUser);
+router.put('/updateD/:alias', updateUser.updateDescription);
+router.put('/updateI/:alias', updateUser.updateInterests);
+router.get('/getUserInfo', getInfo.getUserData);
 module.exports = router;

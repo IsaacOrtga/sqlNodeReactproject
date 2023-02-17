@@ -1,6 +1,4 @@
 const mysql = require('mysql');
-const { encrypt } = require('../helpers/handleBcrypt');
-
 const connection = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
@@ -8,28 +6,50 @@ const connection = mysql.createConnection({
     database: process.env.DATABASE
 });
 
-async function updateUser(req, res) {
-    const { password_u, description_u, interests, profile_image } = req.body;
-    const user_id = req.cookies.user_id;
 
-    const encryptedPassword = await encrypt(password_u);
 
-    const updateUserQuery = `UPDATE users SET password_u = ?, description_u = ?, interests = ?, profile_image = ? where user_id = ?`;
-    const values = [encryptedPassword, description_u, interests, profile_image, user_id];
+async function updateDescription(req, res) {
+    const alias = req.params.alias;
+    const { description_u, } = req.body;
 
-    connection.query(updateUserQuery, values, function(error, result) {
+    const updateUserQuery = `UPDATE users SET description_u = ? where alias = ?;`;
+    const values = [description_u, alias];
+
+    connection.query(updateUserQuery, values, function (error, result) {
         if (error) {
-            throw error;
+            console.error(error);
+            res.status(500).json({ message: 'An error ocurred updating the user' });
         } else {
             res.status(200).json({
-                message: 'Usuario actualizado correctamente'
+                message: 'The user has been updated'
             });
-            connection.end();
+
+        }
+    });
+}
+async function updateInterests(req, res) {
+    const alias = req.params.alias;
+    const { interests } = req.body;
+
+    const updateUserQuery = `UPDATE users SET interests = ? where alias = ?;`;
+    const values = [JSON.stringify(interests), alias];
+
+    connection.query(updateUserQuery, values, function (error, result) {
+        if (error) {
+            console.error(error);
+            res.status(500).json({ message: 'An error ocurred updating the user' });
+        } else {
+            res.status(200).json({
+                message: 'The user has been updated'
+            });
+
         }
     });
 }
 
-module.exports = { updateUser };
 
 
-// $2a$10$GfN6Ud/1U3YR/EEoQf8SB.APliMfpODRPyOzBAg/O45tWKIAhBI1K
+module.exports = {
+    updateDescription,
+    updateInterests
+};

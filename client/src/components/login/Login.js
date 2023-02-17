@@ -6,8 +6,9 @@ function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password_u, setPassword] = useState('');
+    const [token, setToken] = useState('');
 
-    const loggedIn = (e, req, res, next) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const requestSearch = {
             method: "POST",
@@ -21,7 +22,8 @@ function Login() {
    fetch("login", requestSearch) 
    .then((response) => response.json())
    .then(res => {
-    if (res.status === true) {       
+    if (res.status === true) {    
+        document.cookie = `token=${res.token}; secure; sameSite=strict`;   
         navigate('/dashboard');
     } else {
         navigate('');
@@ -69,7 +71,7 @@ function Login() {
                     size="sm"
                     type="submit"
                     style={{ width: "30%" }}
-                    onClick={loggedIn}>
+                    onClick={handleSubmit}>
                     Iniciar Sesión
                 </Button>
                 {/* <a id="recovery" href='#'>He olvidado mi contraseña</a> */}
